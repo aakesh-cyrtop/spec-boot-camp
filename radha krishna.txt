@@ -1,0 +1,325 @@
+import turtle
+import math
+import random
+
+# Screen setup
+screen = turtle.Screen()
+screen.setup(1000, 800)
+screen.bgcolor("#160d2b")
+screen.title("Radha Krishna - Python Art")
+screen.tracer(0)
+
+pen = turtle.Turtle()
+pen.speed(0)
+pen.hideturtle()
+
+# Drawing functions
+def move(x, y):
+    pen.penup()
+    pen.goto(x, y)
+    pen.pendown()
+
+def circle(x, y, radius, color):
+    move(x, y - radius)
+    pen.color(color)
+    pen.begin_fill()
+    pen.circle(radius)
+    pen.end_fill()
+
+def line(x1, y1, x2, y2, color, width=3):
+    move(x1, y1)
+    pen.color(color)
+    pen.width(width)
+    pen.goto(x2, y2)
+    pen.width(1)
+
+def ellipse(x, y, rx, ry, color):
+    move(x + rx, y)
+    pen.color(color)
+    pen.begin_fill()
+    for i in range(361):
+        angle = math.radians(i)
+        pen.goto(x + rx * math.cos(angle),
+                 y + ry * math.sin(angle))
+    pen.end_fill()
+
+def text(x, y, message, size, color):
+    move(x, y)
+    pen.color(color)
+    pen.write(message, align="center",
+              font=("Arial", size, "bold"))
+
+def flower(x, y, color):
+    for i in range(8):
+        angle = math.radians(i * 45)
+        px = x + 12 * math.cos(angle)
+        py = y + 12 * math.sin(angle)
+        circle(px, py, 6, color)
+    circle(x, y, 5, "#ffdf75")
+
+# Background stars
+for i in range(90):
+    x = random.randint(-480, 480)
+    y = random.randint(-370, 370)
+    circle(x, y, 2, "#ffe6a3")
+
+# Decorative moon
+circle(370, 290, 48, "#ffe6a3")
+circle(390, 310, 43, "#160d2b")
+
+# Krishna's body and clothes
+ellipse(-125, -180, 105, 155, "#1263a5")
+ellipse(-125, -235, 115, 85, "#f2b52c")
+
+# Krishna face
+ellipse(-125, 65, 69, 88, "#559bdc")
+
+# Krishna hair
+ellipse(-175, 120, 35, 50, "#17121d")
+ellipse(-125, 151, 65, 24, "#17121d")
+ellipse(-77, 119, 32, 48, "#17121d")
+
+# Krishna ears
+circle(-193, 55, 15, "#559bdc")
+circle(-57, 55, 15, "#559bdc")
+
+# Krishna eyes
+ellipse(-150, 82, 8, 5, "white")
+ellipse(-100, 82, 8, 5, "white")
+circle(-150, 82, 3, "#17121d")
+circle(-100, 82, 3, "#17121d")
+
+# Krishna eyebrows and smile
+line(-164, 94, -140, 99, "#17121d", 3)
+line(-112, 99, -88, 94, "#17121d", 3)
+pen.color("#7b183b")
+move(-142, 27)
+pen.width(3)
+pen.setheading(-25)
+pen.circle(35, 50)
+
+# Krishna tilak
+line(-125, 145, -125, 112, "#fff0c2", 4)
+circle(-125, 107, 4, "#e2a52d")
+
+# Peacock feather
+line(-125, 170, -100, 250, "#4fcf9a", 5)
+ellipse(-90, 250, 17, 34, "#21b77a")
+ellipse(-90, 250, 9, 23, "#238cdd")
+circle(-90, 250, 6, "#e5bd4d")
+
+# Krishna flute
+line(-210, 5, -30, -15, "#dca64b", 7)
+for x in [-180, -150, -120, -90, -60]:
+    circle(x, -5, 3, "#432b19")
+
+# Krishna jewellery
+for x in [-155, -125, -95]:
+    circle(x, -15, 5, "#ffd65a")
+circle(-125, -105, 13, "#f8c74b")
+
+# Radha's clothes
+ellipse(130, -190, 110, 155, "#bd397f")
+ellipse(130, -245, 120, 85, "#f4b84d")
+
+# Radha face
+ellipse(130, 65, 69, 88, "#f0bd9d")
+
+# Radha hair
+ellipse(130, 143, 69, 30, "#241522")
+ellipse(75, 110, 29, 55, "#241522")
+ellipse(185, 110, 29, 55, "#241522")
+
+# Radha ears
+circle(63, 58, 13, "#f0bd9d")
+circle(197, 58, 13, "#f0bd9d")
+
+# Radha eyes
+ellipse(105, 82, 8, 5, "white")
+ellipse(155, 82, 8, 5, "white")
+circle(105, 82, 3, "#241522")
+circle(155, 82, 3, "#241522")
+
+# Radha eyebrows
+line(91, 96, 115, 100, "#241522", 3)
+line(145, 100, 169, 96, "#241522", 3)
+
+# Radha smile
+move(112, 27)
+pen.color("#9e3151")
+pen.width(3)
+pen.setheading(-20)
+pen.circle(30, 45)
+
+# Radha bindi
+circle(130, 112, 5, "#b21d48")
+
+# Radha jewellery
+circle(130, 5, 8, "#ffd34f")
+circle(63, 48, 7, "#ffd34f")
+circle(197, 48, 7, "#ffd34f")
+
+# Radha crown
+line(80, 145, 180, 145, "#f5c84e", 5)
+for x in [95, 115, 135, 155, 175]:
+    circle(x, 153, 7, "#f8d75b")
+line(130, 153, 130, 190, "#f5c84e", 4)
+circle(130, 190, 9, "#ec7eae")
+
+# Decorative flowers
+for x, y in [(-300, 150), (300, 150),
+             (-350, -200), (350, -200),
+             (0, 310), (-250, 300), (250, 300)]:
+    flower(x, y, "#f06caa")
+
+# Decorative border
+pen.color("#e7bd65")
+pen.width(4)
+move(-450, -330)
+for x, y in [(450, -330), (450, 330),
+             (-450, 330), (-450, -330)]:
+    pen.goto(x, y)
+
+# Title
+text(0, -355, "RADHA KRISHNA", 25, "#ffe4a1")
+text(0, -385, "PREMA • BHAKTI • DIVINITY", 12, "#f2a6cf")
+
+screen.update()
+turtle.done()
+
+
+import turtle
+
+screen = turtle.Screen()
+screen.setup(800, 700)
+screen.bgcolor("#fff4df")
+screen.title("Radha and Krishna")
+
+pen = turtle.Turtle()
+pen.speed(0)
+pen.hideturtle()
+pen.pensize(3)
+
+
+def circle(x, y, radius, color, outline="#4b3028"):
+    pen.penup()
+    pen.goto(x, y - radius)
+    pen.pendown()
+    pen.color(outline, color)
+    pen.begin_fill()
+    pen.circle(radius)
+    pen.end_fill()
+
+
+def polygon(points, color, outline="#4b3028"):
+    pen.penup()
+    pen.goto(points[0])
+    pen.pendown()
+    pen.color(outline, color)
+    pen.begin_fill()
+    for point in points[1:]:
+        pen.goto(point)
+    pen.goto(points[0])
+    pen.end_fill()
+
+
+def line(points, color="#4b3028", width=3):
+    pen.penup()
+    pen.goto(points[0])
+    pen.pendown()
+    pen.pencolor(color)
+    pen.pensize(width)
+    for point in points[1:]:
+        pen.goto(point)
+    pen.pensize(3)
+
+
+def draw_body(x, dress_color, trim_color):
+    # Flowing dress
+    polygon([
+        (x - 55, -10), (x + 55, -10), (x + 105, -220),
+        (x - 105, -220)
+    ], dress_color)
+
+    # Decorative hem
+    line([(x - 100, -190), (x, -205), (x + 100, -190)],
+         trim_color, 5)
+
+    # Neck and necklace
+    polygon([(x - 20, 15), (x + 20, 15), (x + 15, -28),
+             (x - 15, -28)], "#f2c6a5", "#4b3028")
+    line([(x - 25, -5), (x, -25), (x + 25, -5)],
+         "#ffd44f", 4)
+    circle(x, -26, 5, "#e29c26")
+
+
+def draw_face(x, skin_color, hair_color):
+    # Hair behind the face
+    circle(x, 75, 58, hair_color)
+
+    # Face
+    circle(x, 70, 43, skin_color)
+
+    # Eyes
+    circle(x - 15, 79, 4, "#241811", "#241811")
+    circle(x + 15, 79, 4, "#241811", "#241811")
+
+    # Eyebrows, nose, and smile
+    line([(x - 23, 91), (x - 14, 95)], "#4b3028", 2)
+    line([(x + 14, 95), (x + 23, 91)], "#4b3028", 2)
+    line([(x, 76), (x - 3, 62), (x + 2, 60)], "#9b5b43", 2)
+    line([(x - 10, 48), (x, 44), (x + 10, 48)], "#8b3d3d", 2)
+
+
+def draw_crown(x, color):
+    polygon([
+        (x - 42, 112), (x - 32, 157), (x - 10, 135),
+        (x, 170), (x + 12, 135), (x + 34, 157), (x + 43, 112)
+    ], color)
+    line([(x - 38, 116), (x + 38, 116)], "#ffd44f", 4)
+    circle(x, 146, 6, "#fff0a8")
+
+
+# Bodies first, so the heads appear in front
+draw_body(-125, "#e88ca9", "#ffd44f")
+draw_body(125, "#57b8c5", "#ffd44f")
+
+# Heads and crowns
+draw_face(-125, "#f2c6a5", "#40251f")
+draw_face(125, "#5aa8dc", "#202b32")
+draw_crown(-125, "#d94f83")
+draw_crown(125, "#e8a72e")
+
+# Radha's veil
+polygon([
+    (-168, 115), (-190, 145), (-205, 45),
+    (-190, -20), (-165, -12), (-180, 50)
+], "#f4b4c7", "#a13e60")
+line([(-185, 124), (-200, 45), (-186, -8)], "#ffd44f", 3)
+
+# Krishna's peacock feather
+line([(125, 163), (147, 195)], "#287a52", 4)
+circle(151, 201, 12, "#45a878")
+circle(151, 201, 6, "#3b83b9")
+circle(151, 201, 2, "#f4d45c")
+
+# Krishna's flute
+line([(48, 37), (202, 37)], "#8b572e", 7)
+for x in (82, 105, 128, 151, 174):
+    circle(x, 37, 2.5, "#f7e3b2", "#f7e3b2")
+
+# Small decorative flowers
+for x, y in [(-260, 100), (260, 120), (-235, -90), (235, -80)]:
+    circle(x, y, 7, "#f5bd45")
+    circle(x, y + 10, 6, "#e887a6")
+    circle(x + 9, y + 3, 6, "#e887a6")
+    circle(x - 9, y + 3, 6, "#e887a6")
+
+# Caption
+pen.penup()
+pen.goto(0, -275)
+pen.color("#713b43")
+pen.write("Radha & Krishna", align="center",
+          font=("Georgia", 24, "bold"))
+
+screen.exitonclick()
